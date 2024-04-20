@@ -1,8 +1,15 @@
 package exercises
 
-import "sort"
+import (
+	"errors"
+	"sort"
+)
 
-func OrderAscendingNumericRunes(r []rune) []rune {
+func OrderAscendingNumericRunes(r []rune) ([]rune, error) {
+
+	if len(r) == 0 {
+		return r, errors.New("rune array empty")
+	}
 
 	// Convert runes to integers
 	ints := make([]int, len(r))
@@ -11,7 +18,7 @@ func OrderAscendingNumericRunes(r []rune) []rune {
 	}
 
 	// Sort integeers in descending order
-	sort.Sort(sort.IntSlice(ints))
+	sort.Ints(ints)
 
 	// Convert integers back to runes
 	sortedRunes := make([]rune, len(r))
@@ -19,5 +26,5 @@ func OrderAscendingNumericRunes(r []rune) []rune {
 		sortedRunes[i] = rune(v + '0')
 	}
 
-	return sortedRunes
+	return sortedRunes, nil
 }
